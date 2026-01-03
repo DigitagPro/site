@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiTag Pro | L'Élégance Connectée</title>
+    <meta name="description" content="Plaques NFC & QR de luxe pour entreprises. Augmentez vos avis Google avec élégance.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Urbanist:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --gold: #D4AF37;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+
+        /* BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Urbanist', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid var(--gold);
+        }
+
+        .btn-primary {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* ANIMATED CARD (CSS ONLY) */
+        .card-display {
+            margin: 50px auto;
+            width: 300px;
+            height: 180px;
+            background: #111;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .card-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .card-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display';
+            color: var(--gold);
+            font-size: 24px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        /* FEATURES GRID */
+        .features {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-box {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .feature-box:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .feature-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .feature-box p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* STATS */
+        .stats {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 { font-size: 48px; color: white; margin-bottom: 5px; }
+        .stat-item p { color: var(--gold); text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+
+        /* FOOTER */
+        footer {
+            padding: 60px 0;
+            background: #050505;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .stats-grid { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">DIGITAG <span class="gold-text">PRO</span></div>
+                <ul class="nav-links">
+                    <li><a href="#concept">Concept</a></li>
+                    <li><a href="#features">Solutions</a></li>
+                    <li><a href="#pricing">Tarifs</a></li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Commander</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <p style="color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-size: 14px; margin-bottom: 20px;">L'excellence du sans-contact</p>
+            <h1>Sublimez votre <br><span class="gold-text">Réputation Digitale</span></h1>
+            <p>La première plaque NFC en matériaux nobles conçue pour les établissements de prestige. Transformez vos clients en ambassadeurs d'un simple geste.</p>
+            
+            <div class="card-display">
+                <div class="card-logo">DigiTag Pro</div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="#contact" class="btn btn-primary">Configurer ma plaque</a>
+                <a href="#features" class="btn btn-outline" style="margin-left: 20px;">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>+400%</h3>
+                    <p>D'avis Google</p>
+                </div>
+                <div class="stat-item">
+                    <h3>0</h3>
+                    <p>Application requise</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Sans abonnement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Une Technologie <span class="gold-text">Invisible</span></h2>
+                <p style="color: #666;">Design épuré, performance maximale.</p>
+            </div>
+
+            <div class="grid">
+                <div class="feature-box">
+                    <h3>Matériaux Premium</h3>
+                    <p>Plexiglass haute densité, finition noire mate ou effet brossé. Une plaque qui s'intègre parfaitement à votre décoration intérieure.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Puce NFC Ultra-Rapide</h3>
+                    <p>Pas de caméra, pas de flash. Il suffit d'approcher le smartphone à 2cm de la plaque pour déclencher l'action.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>QR Code Doré</h3>
+                    <p>Pour les téléphones plus anciens, un QR code discrètement intégré assure une compatibilité universelle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 20px; opacity: 0.5;">DIGITAG PRO</div>
+            <p>&copy; 2024 DigiTag Pro. Design Luxury Edition.</p>
+            <p style="margin-top: 10px; font-size: 12px;">Conditions Générales de Vente - Mentions Légales</p>
+        </div>
+    </footer>
+
+</body>
+</html>
