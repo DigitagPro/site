@@ -3,262 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiTag Pro | L'Élégance Connectée</title>
-    <meta name="description" content="Plaques NFC & QR de luxe pour entreprises. Augmentez vos avis Google avec élégance.">
+    <title>DigiTag Pro - Plaques NFC & QR pour Franchises</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Urbanist:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
+        /* --- VARIABLES & RESET --- */
         :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #141414;
-            --gold: #D4AF37;
-            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
+            --bg-dark: #050505; /* Fond très sombre */
+            --bg-card: #0f0f11; /* Fond des cartes */
+            --bg-card-hover: #161618;
+            --primary-gradient: linear-gradient(90deg, #3b82f6, #8b5cf6, #d946ef); /* Bleu vers Rose/Violet */
+            --purple-gradient: linear-gradient(135deg, #a855f7, #ec4899);
+            --text-white: #ffffff;
+            --text-gray: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --primary-glow: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
         }
 
-        /* BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             background-color: var(--bg-dark);
-            color: var(--text-main);
+            color: var(--text-white);
             font-family: 'Urbanist', sans-serif;
-            overflow-x: hidden;
             line-height: 1.6;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* UTILITIES */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .gold-text {
-            background: var(--gold-gradient);
+        /* --- UTILITAIRES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        .gradient-text {
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
         }
 
-        .btn {
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            padding: 6px 16px;
+            border-radius: 99px;
             font-size: 12px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 1px solid var(--gold);
-        }
-
-        .btn-primary {
-            background: var(--gold-gradient);
-            color: #000;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--gold);
-        }
-
-        .btn-outline:hover {
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        /* HEADER */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 1px;
-        }
-
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-        .nav-links a:hover { opacity: 1; color: var(--gold); }
-
-        /* HERO SECTION */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        /* ANIMATED CARD (CSS ONLY) */
-        .card-display {
-            margin: 50px auto;
-            width: 300px;
-            height: 180px;
-            background: #111;
-            border-radius: 15px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 1px solid #333;
-            overflow: hidden;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .card-display::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        .card-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Playfair Display';
-            color: var(--gold);
-            font-size: 24px;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotateX(0deg); }
-            50% { transform: translateY(-20px) rotateX(5deg); }
-        }
-
-        /* FEATURES GRID */
-        .features {
-            padding: 100px 0;
-            background: var(--bg-dark);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-bottom: 24px;
+            text-transform: uppercase;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 16px; font-weight: 700; }
+        .section-title p { color: var(--text-gray); max-width: 600px; margin: 0 auto; }
 
-        .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-box {
-            background: var(--bg-card);
-            padding: 40px;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
-
-        .feature-box:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
-
-        .feature-box h3 {
-            color: var(--gold);
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .feature-box p {
-            color: var(--text-muted);
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 99px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
             font-size: 15px;
         }
-
-        /* STATS */
-        .stats {
-            padding: 80px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        
+        .btn-gradient {
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            border: none;
         }
+        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
 
-        .stats-grid {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            flex-wrap: wrap;
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
         }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: white; }
 
-        .stat-item h3 { font-size: 48px; color: white; margin-bottom: 5px; }
-        .stat-item p { color: var(--gold); text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 700; background: linear-gradient(90deg, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: #d1d5db; font-size: 14px; font-weight: 500; }
+        .nav-links a:hover { color: white; }
 
-        /* FOOTER */
-        footer {
-            padding: 60px 0;
-            background: #050505;
+        /* --- HERO --- */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
             text-align: center;
-            font-size: 14px;
-            color: #555;
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 60%);
         }
         
-        /* RESPONSIVE */
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 800;
+        }
+        
+        .hero p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; margin-bottom: 80px; }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 16px;
+        }
+        .stat-number { font-size: 24px; font-weight: 700; color: #a855f7; margin-bottom: 4px; display: block; }
+        .stat-label { font-size: 13px; color: var(--text-gray); }
+
+        /* --- SOLUTIONS GRID --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: 12px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .card:hover { border-color: #6366f1; background: var(--bg-card-hover); }
+
+        .card-icon {
+            width: 48px; height: 48px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        /* Icon Colors specific to screenshot */
+        .icon-orange { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+        .icon-purple { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+        .icon-blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .icon-green { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .icon-pink { background: rgba(236, 72, 153, 0.1); color: #ec4899; }
+
+        .card h3 { font-size: 18px; margin-bottom: 12px; }
+        .card p { font-size: 14px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.5; }
+        
+        .card-bullets { font-size: 13px; color: var(--text-gray); }
+        .card-bullets li { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .card-bullets li::before { content: "•"; color: #6366f1; }
+
+        /* --- EXEMPLES USAGE --- */
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 80px;
+        }
+        .usage-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .usage-card h4 { font-size: 16px; margin-bottom: 8px; }
+        .usage-card p { font-size: 13px; color: var(--text-gray); }
+
+        /* --- FRANCHISES (B2B) --- */
+        .franchise-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0c0a18 100%);
+        }
+        
+        .badge-purple {
+            background: rgba(168, 85, 247, 0.1);
+            color: #d8b4fe;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .deployment-box {
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .check-list li {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+        .check-icon {
+            background: #ec4899; color: white;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px;
+        }
+
+        .discount-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .discount-val { font-size: 40px; font-weight: 800; color: #e879f9; display: block; }
+        .btn-full { width: 100%; margin-top: 20px; background: var(--purple-gradient); border: none; color: white; }
+
+        /* --- TECH & QUALITE --- */
+        .tech-section { padding: 100px 0; }
+        
+        .made-in-france {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+        .mif-item h5 { font-size: 18px; margin: 10px 0 5px; }
+        .mif-item span { font-size: 24px; }
+        .mif-item p { font-size: 13px; color: var(--text-gray); }
+
+        /* --- CONTACT --- */
+        .contact-section { padding: 80px 0; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .form-box, .contact-info-box {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 13px; margin-bottom: 8px; color: var(--text-gray); }
+        .input-field {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+        }
+        .input-field:focus { outline: none; border-color: #6366f1; }
+        textarea.input-field { resize: vertical; min-height: 100px; }
+
+        .contact-method {
+            background: rgba(255,255,255,0.03);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .cm-icon {
+            width: 40px; height: 40px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+        .cm-whatsapp { background: #10b981; }
+        .cm-email { background: #6366f1; }
+        .cm-phone { background: #8b5cf6; }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px;
+            font-size: 14px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { margin-bottom: 20px; color: white; }
+        .footer-col ul li { margin-bottom: 10px; color: var(--text-gray); cursor: pointer; }
+        .footer-col ul li:hover { color: white; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
+        }
+
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .grid-container, .deployment-box, .contact-grid, .footer-grid, .usage-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-            .stats-grid { flex-direction: column; gap: 40px; }
+            .deployment-box { gap: 30px; padding: 20px; }
+            .made-in-france { flex-direction: column; gap: 20px; }
         }
     </style>
 </head>
@@ -267,72 +368,299 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">DIGITAG <span class="gold-text">PRO</span></div>
+                <div class="logo">DigiTag Pro</div>
                 <ul class="nav-links">
-                    <li><a href="#concept">Concept</a></li>
-                    <li><a href="#features">Solutions</a></li>
-                    <li><a href="#pricing">Tarifs</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#franchises">Franchises</a></li>
+                    <li><a href="#technologie">Technologie</a></li>
                 </ul>
-                <a href="#contact" class="btn btn-primary">Commander</a>
+                <a href="#contact" class="btn btn-gradient" style="padding: 8px 20px; font-size: 14px;">Devis gratuit</a>
             </nav>
         </div>
     </header>
 
     <section class="hero">
-        <div class="container hero-content">
-            <p style="color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-size: 14px; margin-bottom: 20px;">L'excellence du sans-contact</p>
-            <h1>Sublimez votre <br><span class="gold-text">Réputation Digitale</span></h1>
-            <p>La première plaque NFC en matériaux nobles conçue pour les établissements de prestige. Transformez vos clients en ambassadeurs d'un simple geste.</p>
-            
-            <div class="card-display">
-                <div class="card-logo">DigiTag Pro</div>
-            </div>
-
-            <div style="margin-top: 40px;">
-                <a href="#contact" class="btn btn-primary">Configurer ma plaque</a>
-                <a href="#features" class="btn btn-outline" style="margin-left: 20px;">En savoir plus</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>+400%</h3>
-                    <p>D'avis Google</p>
+            <div class="badge-top">
+                <i class="ph ph-sparkle-fill"></i> Technologie Premium <i class="ph ph-sparkle-fill"></i>
+            </div>
+            
+            <h1>
+                <span class="gradient-text">DigiTag Pro</span><br>
+                Plaques NFC + QR<br>
+                pour franchises et réseaux pros
+            </h1>
+            
+            <p class="subtitle">
+                Boostez vos avis Google et votre image de marque, à l'échelle de votre réseau.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-gradient">Demander un devis <i class="ph ph-arrow-right"></i></a>
+                <a href="#solutions" class="btn btn-outline">Découvrir nos solutions</a>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Entreprises</span>
                 </div>
-                <div class="stat-item">
-                    <h3>0</h3>
-                    <p>Application requise</p>
+                <div class="stat-card">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Satisfaction</span>
                 </div>
-                <div class="stat-item">
-                    <h3>100%</h3>
-                    <p>Sans abonnement</p>
+                <div class="stat-card">
+                    <span class="stat-number">24h</span>
+                    <span class="stat-label">Devis rapide</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">FR</span>
+                    <span class="stat-label">Fabrication FR</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
+    <section id="solutions" style="padding: 80px 0;">
         <div class="container">
             <div class="section-title">
-                <h2>Une Technologie <span class="gold-text">Invisible</span></h2>
-                <p style="color: #666;">Design épuré, performance maximale.</p>
+                <h2 class="gradient-text">Nos solutions</h2>
+                <p>Des plaques connectées adaptées à chaque besoin professionnel</p>
             </div>
 
-            <div class="grid">
-                <div class="feature-box">
-                    <h3>Matériaux Premium</h3>
-                    <p>Plexiglass haute densité, finition noire mate ou effet brossé. Une plaque qui s'intègre parfaitement à votre décoration intérieure.</p>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon icon-orange"><i class="ph ph-star-fill"></i></div>
+                    <h3>Avis Google</h3>
+                    <p>Collectez des avis clients en un scan. Augmentez votre note et votre visibilité locale.</p>
+                    <ul class="card-bullets">
+                        <li>QR dynamique</li>
+                        <li>Lien personnalisé</li>
+                        <li>Suivi en temps réel</li>
+                    </ul>
                 </div>
-                <div class="feature-box">
-                    <h3>Puce NFC Ultra-Rapide</h3>
-                    <p>Pas de caméra, pas de flash. Il suffit d'approcher le smartphone à 2cm de la plaque pour déclencher l'action.</p>
+
+                <div class="card">
+                    <div class="card-icon icon-purple"><i class="ph ph-share-network-fill"></i></div>
+                    <h3>Réseaux sociaux</h3>
+                    <p>Connectez vos clients à vos profils Instagram, Facebook, TikTok en un instant.</p>
+                    <ul class="card-bullets">
+                        <li>Multi-plateformes</li>
+                        <li>Design sur mesure</li>
+                        <li>NFC + QR</li>
+                    </ul>
                 </div>
-                <div class="feature-box">
-                    <h3>QR Code Doré</h3>
-                    <p>Pour les téléphones plus anciens, un QR code discrètement intégré assure une compatibilité universelle.</p>
+
+                <div class="card">
+                    <div class="card-icon icon-blue"><i class="ph ph-buildings-fill"></i></div>
+                    <h3>Plaques entreprise</h3>
+                    <p>Plaques professionnelles premium pour agences, hôtels, restaurants et franchises.</p>
+                    <ul class="card-bullets">
+                        <li>Branding soigné</li>
+                        <li>Matériaux durables</li>
+                        <li>Logo personnalisé</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon icon-green"><i class="ph ph-lightning-fill"></i></div>
+                    <h3>NFC Dynamique</h3>
+                    <p>Modifiez vos liens à distance sans réimprimer. Technologie sans contact intégrée.</p>
+                    <ul class="card-bullets">
+                        <li>Modifiable à volonté</li>
+                        <li>Pas de réimpression</li>
+                        <li>Tech NFC avancée</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="usage-grid">
+                <div class="usage-card">
+                    <h4>Agences Immobilières</h4>
+                    <p>Collectez des avis après chaque visite</p>
+                </div>
+                <div class="usage-card">
+                    <h4>Hôtels & Restaurants</h4>
+                    <p>Améliorez votre e-réputation</p>
+                </div>
+                <div class="usage-card">
+                    <h4>Salons & Commerces</h4>
+                    <p>Développez votre communauté en ligne</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="franchises" class="franchise-section">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="badge-purple">OFFRE B2B</span>
+                <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Pour les franchises</h2>
+                <p style="color:var(--text-gray); margin-bottom: 60px;">Équipez l'ensemble de votre réseau avec une solution clé en main, standardisée et évolutive</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon icon-pink"><i class="ph ph-tree-structure-fill"></i></div>
+                    <h3>Standardisation du design</h3>
+                    <p>Une identité visuelle cohérente sur tous vos points de vente. Charte graphique respectée.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-purple"><i class="ph ph-package-fill"></i></div>
+                    <h3>Commande groupée</h3>
+                    <p>Tarifs dégressifs pour vos réseaux. Gestion simplifiée des volumes importants.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-pink"><i class="ph ph-map-pin-fill"></i></div>
+                    <h3>Expédition multi-adresses</h3>
+                    <p>Livraison directe vers chaque franchise. Suivi logistique centralisé et transparent.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-purple"><i class="ph ph-chart-bar-fill"></i></div>
+                    <h3>Suivi des performances</h3>
+                    <p>Dashboard centralisé pour analyser l'engagement par emplacement. Data en temps réel.</p>
+                </div>
+            </div>
+
+            <div class="deployment-box">
+                <div>
+                    <h3 style="font-size: 24px; margin-bottom: 24px;">Un déploiement simplifié à l'échelle</h3>
+                    <ul class="check-list">
+                        <li><span class="check-icon"><i class="ph ph-check"></i></span> Configuration initiale unique</li>
+                        <li><span class="check-icon"><i class="ph ph-check"></i></span> Template personnalisé à votre marque</li>
+                        <li><span class="check-icon"><i class="ph ph-check"></i></span> Livraison coordonnée sur tous vos sites</li>
+                        <li><span class="check-icon"><i class="ph ph-check"></i></span> Support dédié et formation incluse</li>
+                        <li><span class="check-icon"><i class="ph ph-check"></i></span> Mise à jour des liens à distance</li>
+                    </ul>
+                </div>
+                <div class="discount-card">
+                    <span class="discount-val">-30%</span>
+                    <p>sur les commandes groupées de +50 plaques</p>
+                    <button class="btn btn-full">Obtenir un devis franchise</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technologie" class="tech-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="gradient-text">Technologie & Qualité</h2>
+                <p>L'excellence technologique au service de votre image de marque</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon icon-blue"><i class="ph ph-device-mobile"></i></div>
+                    <h3>NFC + QR Dynamiques</h3>
+                    <p>Double technologie pour une compatibilité maximale. Tous les smartphones sont supportés.</p>
+                    <ul class="card-bullets"><li>Lecture instantanée</li><li>Sans application</li></ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-blue"><i class="ph ph-link"></i></div>
+                    <h3>Liens modifiables à distance</h3>
+                    <p>Changez votre destination à tout moment sans refaire vos plaques.</p>
+                    <ul class="card-bullets"><li>Dashboard en ligne</li><li>Mise à jour immédiate</li></ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-blue"><i class="ph ph-shield-check"></i></div>
+                    <h3>Matériaux résistants</h3>
+                    <p>Plaques conçues pour durer. Résistance aux UV, à l'eau et aux chocs.</p>
+                    <ul class="card-bullets"><li>Acrylique premium</li><li>Garantie 5 ans</li></ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-blue"><i class="ph ph-sparkle"></i></div>
+                    <h3>Finitions premium</h3>
+                    <p>Effet chrome, métal brossé, ou personnalisé. Rendu haut de gamme garanti.</p>
+                    <ul class="card-bullets"><li>Logo en relief</li><li>Fabrication française</li></ul>
+                </div>
+            </div>
+
+            <div class="made-in-france">
+                <div class="mif-item">
+                    <span>🇫🇷</span>
+                    <h5>Made in France</h5>
+                    <p>Production locale</p>
+                </div>
+                <div class="mif-item">
+                    <span>⚡</span>
+                    <h5>Livraison rapide</h5>
+                    <p>3-5 jours ouvrés</p>
+                </div>
+                <div class="mif-item">
+                    <span>🌱</span>
+                    <h5>Éco-responsable</h5>
+                    <p>Matériaux durables</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="gradient-text">Demander un devis</h2>
+                <p>Réponse personnalisée sous 24h. Parlons de votre projet ensemble.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="form-box">
+                    <form onsubmit="event.preventDefault(); alert('Message envoyé !');">
+                        <div class="input-group">
+                            <label>Nom complet *</label>
+                            <input type="text" class="input-field" placeholder="Jean Dupont">
+                        </div>
+                        <div class="input-group">
+                            <label>Entreprise *</label>
+                            <input type="text" class="input-field" placeholder="Ma société">
+                        </div>
+                        <div class="input-group">
+                            <label>Email professionnel *</label>
+                            <input type="email" class="input-field" placeholder="contact@exemple.fr">
+                        </div>
+                        <div class="input-group">
+                            <label>Votre projet *</label>
+                            <textarea class="input-field" placeholder="Décrivez votre besoin..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gradient" style="width:100%">Envoyer ma demande</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-box">
+                    <h3 style="margin-bottom: 24px;">Contactez-nous directement</h3>
+                    
+                    <div class="contact-method">
+                        <div class="cm-icon cm-whatsapp"><i class="ph ph-whatsapp-logo"></i></div>
+                        <div>
+                            <div style="font-weight: 700;">WhatsApp Business</div>
+                            <div style="font-size: 13px; color: #a3a3a3;">Réponse immédiate</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="cm-icon cm-email"><i class="ph ph-envelope"></i></div>
+                        <div>
+                            <div style="font-weight: 700;">Email</div>
+                            <div style="font-size: 13px; color: #a3a3a3;">contact@digitagpro.fr</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="cm-icon cm-phone"><i class="ph ph-phone"></i></div>
+                        <div>
+                            <div style="font-weight: 700;">Téléphone</div>
+                            <div style="font-size: 13px; color: #a3a3a3;">+33 6 12 34 56 78</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 32px;">
+                        <h4 style="margin-bottom: 16px;">Pourquoi nous choisir ?</h4>
+                        <ul class="check-list">
+                            <li><span class="check-icon" style="width:16px;height:16px;font-size:10px;background:#6366f1;"><i class="ph ph-check"></i></span> Devis gratuit sous 24h</li>
+                            <li><span class="check-icon" style="width:16px;height:16px;font-size:10px;background:#6366f1;"><i class="ph ph-check"></i></span> Accompagnement personnalisé</li>
+                            <li><span class="check-icon" style="width:16px;height:16px;font-size:10px;background:#6366f1;"><i class="ph ph-check"></i></span> Qualité premium garantie</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -340,9 +668,35 @@
 
     <footer>
         <div class="container">
-            <div class="logo" style="margin-bottom: 20px; opacity: 0.5;">DIGITAG PRO</div>
-            <p>&copy; 2024 DigiTag Pro. Design Luxury Edition.</p>
-            <p style="margin-top: 10px; font-size: 12px;">Conditions Générales de Vente - Mentions Légales</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="gradient-text" style="font-size: 24px; display:inline-block;">DigiTag Pro</h4>
+                    <p style="color: var(--text-gray); margin-top: 16px;">Plaques NFC et QR premium pour professionnels et réseaux de franchises.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li>Avis Google</li>
+                        <li>Réseaux sociaux</li>
+                        <li>Pour les franchises</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li>À propos</li>
+                        <li>Contact</li>
+                        <li>Mentions légales</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <p style="color: var(--text-gray);">contact@digitagpro.fr</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 DigiTag Pro. Tous droits réservés. Made in France 🇫🇷
+            </div>
         </div>
     </footer>
 
