@@ -77,15 +77,6 @@
             0% { background-position: 200% 200%; }
             100% { background-position: -200% -200%; }
         }
-        
-        /* Styles pour la section IA */
-        .ai-glow {
-            transition: all 0.3s ease;
-        }
-        .ai-glow:hover {
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
-            border-color: rgba(139, 92, 246, 0.3);
-        }
         .loader {
             border: 2px solid rgba(255,255,255,0.1);
             border-top: 2px solid #fff;
@@ -114,7 +105,6 @@
                 <a href="#solutions" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Solutions</a>
                 <a href="#franchises" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Franchises</a>
                 <a href="#galerie" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Réalisations</a>
-                
                 <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-bold hover:shadow-lg hover:shadow-purple-500/20 transition-all transform hover:-translate-y-0.5">
                     Devis gratuit
                 </a>
@@ -469,12 +459,16 @@
                 <p class="text-gray-400">Réponse personnalisée sous 24h. Parlons de votre projet.</p>
             </div>
             
-            <!-- 
-                CONSEIL POUR GOOGLE SHEET : 
-                Pour relier ce formulaire, vous pourrez utiliser un script Google Apps Script 
-                ou un service comme SheetDB. Les attributs 'name' ci-dessous seront vos colonnes.
-            -->
-            <form class="space-y-4" action="https://docs.google.com/forms/d/e/1FAIpQLSfMOUORL2gox5RZGFCFJwP1VaGoirfE2PUTU5NJbkS61TTqEQ/formResponse" method="POST" target="_blank">
+            <!-- Message de succès caché par défaut -->
+            <div id="success-message" class="hidden text-center p-8 bg-green-500/10 border border-green-500/20 rounded-2xl mb-8">
+                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl shadow-lg shadow-green-500/30">
+                    <i class="ri-check-line"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Merci !</h3>
+                <p class="text-green-200">Votre demande a bien été envoyée. Nous vous recontacterons sous 48h.</p>
+            </div>
+
+            <form id="contact-form" class="space-y-4">
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs text-gray-400 mb-2">Nom complet *</label>
@@ -520,13 +514,10 @@
                     <textarea name="entry.1318859065" rows="4" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Décrivez votre besoin (personnalisation, délais...)..." required></textarea>
                 </div>
 
-                <div class="flex items-start gap-3 mt-2">
-                    <input type="checkbox" id="rgpd" required class="mt-1 w-4 h-4 rounded border-gray-600 bg-white/5 text-blue-600 focus:ring-blue-500">
-                    <label for="rgpd" class="text-xs text-gray-500">En soumettant ce formulaire, j'accepte que mes informations soient utilisées pour me recontacter dans le cadre de ma demande de devis.</label>
-                </div>
+                <!-- Case RGPD supprimée ici -->
 
-                <button type="submit" class="w-full py-3.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:shadow-lg transition-all">
-                    Recevoir mon devis
+                <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:shadow-lg transition-all flex items-center justify-center">
+                    <span>Recevoir mon devis</span>
                 </button>
             </form>
         </div>
@@ -570,79 +561,47 @@
         </div>
     </footer>
 
-    <!-- GEMINI API SCRIPT -->
+    <!-- LOGIQUE D'ENVOI DU FORMULAIRE SANS REDIRECTION -->
     <script>
-        const apiKey = ""; // La clé API est injectée automatiquement ici par l'environnement
+        const form = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        const submitBtn = document.getElementById('submit-btn');
 
-        async function callGemini(prompt) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
+            // État de chargement
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loader"></span> Envoi en cours...';
+
+            // Données du formulaire
+            const formData = new FormData(form);
+            
+            // URL Google Form (formResponse)
+            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfMOUORL2gox5RZGFCFJwP1VaGoirfE2PUTU5NJbkS61TTqEQ/formResponse';
+
             try {
-                const response = await fetch(url, {
+                // Envoi des données en mode 'no-cors' pour éviter l'erreur de cross-origin
+                // Note: On ne peut pas savoir si l'envoi a réellement réussi techniquement en mode no-cors,
+                // mais c'est la seule façon de faire sans redirection vers Google.
+                await fetch(googleFormUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
-                    })
+                    mode: 'no-cors',
+                    body: formData
                 });
+
+                // Affichage du message de succès
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
                 
-                if (!response.ok) throw new Error('Erreur API');
-                
-                const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
             } catch (error) {
-                console.error(error);
-                return "Désolé, une erreur est survenue lors de la connexion à l'IA. Veuillez réessayer.";
+                console.error('Erreur:', error);
+                alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
             }
-        }
-
-        async function generateReviewResponse() {
-            const input = document.getElementById('review-input').value;
-            const output = document.getElementById('review-output');
-            const btn = document.getElementById('btn-review');
-            
-            if (!input) {
-                alert("Veuillez entrer un avis client.");
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loader"></span> Rédaction...';
-            output.classList.add('hidden');
-
-            const prompt = `Agis comme un gestionnaire d'entreprise courtois et professionnel. Rédige une réponse courte, empathique et personnalisée à cet avis client (en français) : "${input}". Remercie le client et invite-le à revenir.`;
-            
-            const result = await callGemini(prompt);
-            
-            output.innerHTML = `<strong class="block text-blue-400 mb-2">Suggestion de réponse :</strong>${result.replace(/\n/g, '<br>')}`;
-            output.classList.remove('hidden');
-            btn.disabled = false;
-            btn.innerHTML = '<span>Générer une réponse</span> <i class="ri-sparkling-2-line"></i>';
-        }
-
-        async function generateSlogans() {
-            const input = document.getElementById('slogan-input').value;
-            const output = document.getElementById('slogan-output');
-            const btn = document.getElementById('btn-slogan');
-            
-            if (!input) {
-                alert("Veuillez entrer un type d'activité.");
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loader"></span> Recherche...';
-            output.classList.add('hidden');
-
-            const prompt = `Tu es un expert marketing. Génère 3 idées de slogans courts et accrocheurs (avec des emojis) pour inciter les clients d'un(e) "${input}" à scanner une plaque NFC pour laisser un avis ou s'abonner aux réseaux sociaux. Format liste HTML simple (<ul><li>...).`;
-            
-            const result = await callGemini(prompt);
-            
-            output.innerHTML = `<strong class="block text-purple-400 mb-2">Idées marketing :</strong>${result}`;
-            output.classList.remove('hidden');
-            btn.disabled = false;
-            btn.innerHTML = '<span>Trouver des idées</span> <i class="ri-rocket-line"></i>';
-        }
+        });
     </script>
 </body>
 </html>
